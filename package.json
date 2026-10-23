@@ -1,0 +1,13 @@
+{
+  "name": "agent-qq-bridge-preview",
+  "version": "0.0.0-preview",
+  "private": true,
+  "type": "module",
+  "description": "Agent QQ Bridge development preview and local QQ health diagnostics",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "diagnose": "node bin/diagnose.mjs",
+    "check:release": "node scripts/check-release.mjs"
+  }
+}
