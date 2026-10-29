@@ -1,0 +1,51 @@
+name: Verify and package Windows plugin
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+      - name: Runtime and fake OneBot tests
+        run: npm test
+      - name: Check public release boundary
+        run: npm run check:release
+      - name: Build offline Windows package with official NapCat and Node
+        run: npm run bundle
+      - name: Verify clean install and one-click reuse in Chinese and spaced path
+        shell: pwsh
+        run: |
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $extract = Join-Path $env:RUNNER_TEMP 'Codex QQ 中文目录'
+          [IO.Compression.ZipFile]::ExtractToDirectory((Get-ChildItem dist/*.zip | Select-Object -First 1).FullName, $extract)
+          node scripts/verify-package.mjs (Join-Path $extract 'Codex-QQ-Bridge') (Join-Path $env:RUNNER_TEMP 'qq-install-check')
+          if ($LASTEXITCODE -ne 0) { throw 'Clean installation check failed' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Codex-QQ-Bridge-Windows-x64
+          path: |
+            dist/*.zip
+            dist/*.sha256
+          retention-days: 30
+      - name: Publish versioned beta package
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $version = node -p "JSON.parse(require('fs').readFileSync('package.json','utf8')).version"
+          $tag = 'v' + $version
+          gh release view $tag --repo $env:GITHUB_REPOSITORY 2>$null
+          if ($LASTEXITCODE -eq 0) { Write-Output 'Version already published; existing assets preserved'; exit 0 }
+          gh release create $tag dist/*.zip dist/*.sha256 --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --prerelease --title ('Codex QQ Bridge ' + $version) --notes-file docs/release-notes.md
+          if ($LASTEXITCODE -ne 0) { throw 'Release upload failed' }

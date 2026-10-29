@@ -1,0 +1,11 @@
+{
+  "name": "codex-qq-bridge",
+  "version": "0.1.0-beta.1",
+  "description": "Codex专用QQ机器人：统一启动、扫码登录、人格配置和实时监控。",
+  "author": {"name": "mingjiefan88"},
+  "homepage": "https://github.com/mingjiefan88/Agent-QQ-Bridge",
+  "repository": "https://github.com/mingjiefan88/Agent-QQ-Bridge",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "requires_local_executor": true
+}

@@ -1,0 +1,1 @@
+{"mcpServers":{"codex_qq_bridge":{"command":"powershell.exe","args":["-NoProfile","-ExecutionPolicy","Bypass","-File","${CLAUDE_PLUGIN_ROOT}/scripts/mcp.ps1"]}}}

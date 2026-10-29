@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-29T13:48:18.698Z",
+  "title": "Design System: Codex QQ Bridge",
+  "extensions": {
+    "colorMeta": {
+      "action": {
+        "role": "primary",
+        "displayName": "Action Blue",
+        "tonalRamp": [
+          "oklch(15% 0.1946 263.65)",
+          "oklch(25% 0.1946 263.65)",
+          "oklch(35% 0.1946 263.65)",
+          "oklch(45% 0.1946 263.65)",
+          "oklch(55% 0.1946 263.65)",
+          "oklch(65% 0.1946 263.65)",
+          "oklch(80% 0.1946 263.65)",
+          "oklch(95% 0.1946 263.65)"
+        ]
+      },
+      "action-hover": {
+        "role": "primary",
+        "displayName": "Action Blue Hover",
+        "tonalRamp": [
+          "oklch(15% 0.1686 263.70)",
+          "oklch(25% 0.1686 263.70)",
+          "oklch(35% 0.1686 263.70)",
+          "oklch(45% 0.1686 263.70)",
+          "oklch(55% 0.1686 263.70)",
+          "oklch(65% 0.1686 263.70)",
+          "oklch(80% 0.1686 263.70)",
+          "oklch(95% 0.1686 263.70)"
+        ]
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus Blue",
+        "tonalRamp": [
+          "oklch(15% 0.1728 262.95)",
+          "oklch(25% 0.1728 262.95)",
+          "oklch(35% 0.1728 262.95)",
+          "oklch(45% 0.1728 262.95)",
+          "oklch(55% 0.1728 262.95)",
+          "oklch(65% 0.1728 262.95)",
+          "oklch(80% 0.1728 262.95)",
+          "oklch(95% 0.1728 262.95)"
+        ]
+      },
+      "application-ground": {
+        "role": "neutral",
+        "displayName": "Application Ground",
+        "tonalRamp": [
+          "oklch(15% 0.0034 247.86)",
+          "oklch(25% 0.0034 247.86)",
+          "oklch(35% 0.0034 247.86)",
+          "oklch(45% 0.0034 247.86)",
+          "oklch(55% 0.0034 247.86)",
+          "oklch(65% 0.0034 247.86)",
+          "oklch(80% 0.0034 247.86)",
+          "oklch(95% 0.0034 247.86)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(25% 0.0000 89.88)",
+          "oklch(35% 0.0000 89.88)",
+          "oklch(45% 0.0000 89.88)",
+          "oklch(55% 0.0000 89.88)",
+          "oklch(65% 0.0000 89.88)",
+          "oklch(80% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "sidebar": {
+        "role": "neutral",
+        "displayName": "Sidebar Mist",
+        "tonalRamp": [
+          "oklch(15% 0.0093 242.84)",
+          "oklch(25% 0.0093 242.84)",
+          "oklch(35% 0.0093 242.84)",
+          "oklch(45% 0.0093 242.84)",
+          "oklch(55% 0.0093 242.84)",
+          "oklch(65% 0.0093 242.84)",
+          "oklch(80% 0.0093 242.84)",
+          "oklch(95% 0.0093 242.84)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0239 246.20)",
+          "oklch(25% 0.0239 246.20)",
+          "oklch(35% 0.0239 246.20)",
+          "oklch(45% 0.0239 246.20)",
+          "oklch(55% 0.0239 246.20)",
+          "oklch(65% 0.0239 246.20)",
+          "oklch(80% 0.0239 246.20)",
+          "oklch(95% 0.0239 246.20)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0254 250.43)",
+          "oklch(25% 0.0254 250.43)",
+          "oklch(35% 0.0254 250.43)",
+          "oklch(45% 0.0254 250.43)",
+          "oklch(55% 0.0254 250.43)",
+          "oklch(65% 0.0254 250.43)",
+          "oklch(80% 0.0254 250.43)",
+          "oklch(95% 0.0254 250.43)"
+        ]
+      },
+      "separator": {
+        "role": "neutral",
+        "displayName": "Separator",
+        "tonalRamp": [
+          "oklch(15% 0.0104 247.94)",
+          "oklch(25% 0.0104 247.94)",
+          "oklch(35% 0.0104 247.94)",
+          "oklch(45% 0.0104 247.94)",
+          "oklch(55% 0.0104 247.94)",
+          "oklch(65% 0.0104 247.94)",
+          "oklch(80% 0.0104 247.94)",
+          "oklch(95% 0.0104 247.94)"
+        ]
+      },
+      "selected-navigation": {
+        "role": "neutral",
+        "displayName": "Selected Navigation",
+        "tonalRamp": [
+          "oklch(15% 0.0370 263.62)",
+          "oklch(25% 0.0370 263.62)",
+          "oklch(35% 0.0370 263.62)",
+          "oklch(45% 0.0370 263.62)",
+          "oklch(55% 0.0370 263.62)",
+          "oklch(65% 0.0370 263.62)",
+          "oklch(80% 0.0370 263.62)",
+          "oklch(95% 0.0370 263.62)"
+        ]
+      },
+      "terminal-ground": {
+        "role": "neutral",
+        "displayName": "Terminal Navy",
+        "tonalRamp": [
+          "oklch(15% 0.0272 246.86)",
+          "oklch(25% 0.0272 246.86)",
+          "oklch(35% 0.0272 246.86)",
+          "oklch(45% 0.0272 246.86)",
+          "oklch(55% 0.0272 246.86)",
+          "oklch(65% 0.0272 246.86)",
+          "oklch(80% 0.0272 246.86)",
+          "oklch(95% 0.0272 246.86)"
+        ]
+      },
+      "terminal-ink": {
+        "role": "neutral",
+        "displayName": "Terminal Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0163 245.10)",
+          "oklch(25% 0.0163 245.10)",
+          "oklch(35% 0.0163 245.10)",
+          "oklch(45% 0.0163 245.10)",
+          "oklch(55% 0.0163 245.10)",
+          "oklch(65% 0.0163 245.10)",
+          "oklch(80% 0.0163 245.10)",
+          "oklch(95% 0.0163 245.10)"
+        ]
+      },
+      "terminal-time": {
+        "role": "neutral",
+        "displayName": "Terminal Time",
+        "tonalRamp": [
+          "oklch(15% 0.0383 245.81)",
+          "oklch(25% 0.0383 245.81)",
+          "oklch(35% 0.0383 245.81)",
+          "oklch(45% 0.0383 245.81)",
+          "oklch(55% 0.0383 245.81)",
+          "oklch(65% 0.0383 245.81)",
+          "oklch(80% 0.0383 245.81)",
+          "oklch(95% 0.0383 245.81)"
+        ]
+      },
+      "terminal-source": {
+        "role": "neutral",
+        "displayName": "Terminal Source",
+        "tonalRamp": [
+          "oklch(15% 0.0767 256.56)",
+          "oklch(25% 0.0767 256.56)",
+          "oklch(35% 0.0767 256.56)",
+          "oklch(45% 0.0767 256.56)",
+          "oklch(55% 0.0767 256.56)",
+          "oklch(65% 0.0767 256.56)",
+          "oklch(80% 0.0767 256.56)",
+          "oklch(95% 0.0767 256.56)"
+        ]
+      },
+      "terminal-error": {
+        "role": "neutral",
+        "displayName": "Terminal Error",
+        "tonalRamp": [
+          "oklch(15% 0.0853 19.89)",
+          "oklch(25% 0.0853 19.89)",
+          "oklch(35% 0.0853 19.89)",
+          "oklch(45% 0.0853 19.89)",
+          "oklch(55% 0.0853 19.89)",
+          "oklch(65% 0.0853 19.89)",
+          "oklch(80% 0.0853 19.89)",
+          "oklch(95% 0.0853 19.89)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Page headline",
+        "purpose": "Current page title, compacting at narrow widths."
+      },
+      "title": {
+        "displayName": "Section title",
+        "purpose": "Settings and monitoring section headings."
+      },
+      "body": {
+        "displayName": "UI body",
+        "purpose": "Native desktop controls and input content."
+      },
+      "explanation": {
+        "displayName": "Supporting explanation",
+        "purpose": "Short in-pane instructions."
+      },
+      "label": {
+        "displayName": "Form label",
+        "purpose": "Labels above controls."
+      },
+      "metadata": {
+        "displayName": "Operational metadata",
+        "purpose": "Supporting status and terminal-chrome labels."
+      },
+      "terminal": {
+        "displayName": "Terminal data",
+        "purpose": "Monospaced logs with tabular timestamps."
+      }
+    },
+    "shadows": [
+      {
+        "name": "native-dialog",
+        "value": "0 20px 80px #00000040",
+        "purpose": "Exceptional nested NapCat management dialog only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "control-color",
+        "value": "background .14s, color .14s",
+        "purpose": "Button hover color transitions."
+      },
+      {
+        "name": "log-arrival",
+        "value": "arrive .18s ease-out",
+        "purpose": "Brightness settles from1.3 to1 for new log lines; disabled with reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1650px"
+      },
+      {
+        "name": "dense",
+        "value": "1180px"
+      },
+      {
+        "name": "stacked",
+        "value": "900px"
+      },
+      {
+        "name": "mobile",
+        "value": "600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "A single filled action for starting or saving.",
+      "html": "<button class=\"ds-primary\">保存设置</button>",
+      "css": ".ds-primary{font-family:\"Segoe UI\",\"Microsoft YaHei\",sans-serif;font-size:14px;font-weight:600;color:#fff;background:var(--accent,#285bd4);border:1px solid var(--accent,#285bd4);border-radius:7px;padding:8px 13px;cursor:pointer;transition:background .14s,color .14s}.ds-primary:hover{background:#1d47ac}.ds-primary:focus-visible{outline:3px solid var(--focus,#487ce8);outline-offset:3px}.ds-primary:disabled{cursor:wait;opacity:.58}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A quieter operational action beside the primary.",
+      "html": "<button class=\"ds-secondary\">检测登录</button>",
+      "css": ".ds-secondary{font-family:\"Segoe UI\",\"Microsoft YaHei\",sans-serif;font-size:14px;font-weight:600;color:var(--ink,#202b35);background:#fff;border:1px solid #cbd4de;border-radius:7px;padding:8px 13px;cursor:pointer;transition:background .14s,color .14s}.ds-secondary:hover{background:#eaf0fa}.ds-secondary:focus-visible{outline:3px solid var(--focus,#487ce8);outline-offset:3px}.ds-secondary:disabled{cursor:wait;opacity:.58}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "A labeled configuration input with a clear border and focus.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-name\">机器人名称</label><input class=\"ds-field\" id=\"ds-name\" value=\"小白\">",
+      "css": ".ds-field-label{font-family:\"Segoe UI\",\"Microsoft YaHei\",sans-serif;display:block;font-size:12px;font-weight:600;color:#334353;margin:0 0 8px}.ds-field{font-family:\"Segoe UI\",\"Microsoft YaHei\",sans-serif;font-size:14px;width:100%;box-sizing:border-box;border:1px solid #c6d0db;border-radius:7px;background:#fff;color:var(--ink,#202b35);padding:10px 11px;line-height:1.5;caret-color:var(--accent,#285bd4)}.ds-field:hover{border-color:#c6d0db}.ds-field:focus-visible{outline:3px solid var(--focus,#487ce8);outline-offset:3px}"
+    },
+    {
+      "name": "Selected Navigation",
+      "kind": "nav",
+      "refersTo": "navigation-selected",
+      "description": "The active destination in the desktop sidebar.",
+      "html": "<a class=\"ds-nav\" href=\"#monitor\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 4h18v13H3zM8 21h8m-4-4v4m-6-9 3-3 3 3 5-6\"/></svg>运行监控</a>",
+      "css": ".ds-nav{font-family:\"Segoe UI\",\"Microsoft YaHei\",sans-serif;font-size:14px;font-weight:600;display:flex;gap:12px;align-items:center;padding:12px 13px;color:#174ba8;background:#d6e3fc;text-decoration:none;border-radius:8px}.ds-nav svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.ds-nav:hover{background:#dfe7ef}.ds-nav:focus-visible{outline:3px solid var(--focus,#487ce8);outline-offset:3px}"
+    },
+    {
+      "name": "Operating Badge",
+      "kind": "chip",
+      "description": "Textual paused or running state, never color alone.",
+      "html": "<span class=\"ds-badge\">已暂停</span><span class=\"ds-badge ds-running\">正在运行</span>",
+      "css": ".ds-badge{display:inline-block;font-family:\"Segoe UI\",\"Microsoft YaHei\",sans-serif;font-size:12px;padding:6px 9px;color:#556674;background:#e4e9ee;border-radius:5px;margin-right:8px}.ds-badge.ds-running{background:#e1f0e8;color:#215f45}"
+    },
+    {
+      "name": "Settings Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "A flat contextual configuration surface.",
+      "html": "<section class=\"ds-panel\"><h2>给她一个合适的人格</h2><p>这里决定称呼、语气和角色形象。身份权限由程序核验。</p></section>",
+      "css": ".ds-panel{font-family:\"Segoe UI\",\"Microsoft YaHei\",sans-serif;background:var(--surface,#fff);color:var(--ink,#202b35);border:1px solid var(--line,#dce2e8);border-radius:12px;padding:24px}.ds-panel h2{font-size:18px;font-weight:650;margin:0}.ds-panel p{color:var(--muted,#5c6875);font-size:12px;line-height:1.75;margin:14px 0 0}"
+    },
+    {
+      "name": "Embedded Terminal",
+      "kind": "custom",
+      "refersTo": "terminal",
+      "description": "Actual log data with subdued time and source columns.",
+      "html": "<div class=\"ds-terminal\" tabindex=\"0\" role=\"log\" aria-label=\"运行日志示例\"><div class=\"ds-log\"><span class=\"ds-time\">--:--:--</span><span class=\"ds-source\">中枢</span><span>等待新的活动</span></div></div>",
+      "css": ".ds-terminal{background:var(--terminal,#14202b);color:var(--termtext,#dce6ef);padding:18px 21px;font-family:Consolas,\"Cascadia Mono\",\"Microsoft YaHei\",monospace;font-size:12px;line-height:1.9;font-variant-numeric:tabular-nums;overflow:auto;scrollbar-color:#455c70 #14202b;scrollbar-width:thin}.ds-log{display:grid;grid-template-columns:66px 72px 1fr;gap:9px;overflow-wrap:anywhere;padding:3px 0}.ds-time{color:#8ea4b8}.ds-source{color:#9cbeed}.ds-terminal:focus-visible{outline:3px solid var(--focus,#487ce8);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "本地运行台",
+    "overview": "The existing visual world is a conventional Chinese Windows operation interface. Its restrained shell makes configuration and current execution legible without adding an expressive marketing identity. The user selected contextual settings beside a large, persistent terminal, with NapCat's native interface as a functional reference.\n\nThe terminal is literal working content: real events, public progress, replies and receipts. White surfaces and a muted sidebar organize controls; one action blue identifies primary actions and selection. This record merges the existing decisions with the implemented CSS rather than changing their direction.",
+    "keyCharacteristics": [
+      "Contextual settings beside a persistent terminal.",
+      "Quiet surfaces with one action accent.",
+      "Explicit operating states instead of decorative activity.",
+      "Native desktop typography for controls, monospace for log data."
+    ],
+    "rules": [
+      {
+        "name": "The State Before Decoration Rule",
+        "body": "Use the existing action and status treatments to communicate actual state; do not substitute invented activity for an empty or offline condition.",
+        "section": "colors"
+      },
+      {
+        "name": "The Data Face Rule",
+        "body": "Keep monospace in logs and measurements; ordinary instructions and controls retain the UI face.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Work Surface Rule",
+        "body": "Preserve tonal and border separation for daily controls; reserve elevation for the nested native interface.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** preserve contextual settings beside the large monitor on wide screens, and stack them without horizontal page overflow on narrow screens.",
+      "**Do** use explicit text for waiting, offline, paused, success and failure states.",
+      "**Do** keep focus, caret, selection and terminal scrollbars consistent with the shipped palette.",
+      "**Do** retain native UI typography for controls and monospace for actual log data."
+    ],
+    "donts": [
+      "**Don't** add a decorative label above the page heading; the redundant eyebrow was removed in the final correction.",
+      "**Don't** put ordinary configuration into modal dialogs; the native nested management interface is the documented exception.",
+      "**Don't** add ambient panel shadows or glowing accents to flat application surfaces.",
+      "**Don't** present placeholder counts, fake online states or simulated activity as live operating evidence."
+    ]
+  }
+}
