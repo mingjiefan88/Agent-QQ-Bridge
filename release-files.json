@@ -1,6 +1,7 @@
 [
   ".agents/plugins/marketplace.json",
   ".codex-plugin/plugin.json",
+  ".gitattributes",
   ".github/workflows/ci.yml",
   ".gitignore",
   ".impeccable/design.json",
