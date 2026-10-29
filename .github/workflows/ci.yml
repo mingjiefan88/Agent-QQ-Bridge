@@ -9,6 +9,9 @@ permissions:
 jobs:
   windows:
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: .agents/plugins/codex-qq-bridge
     permissions:
       contents: write
     steps:
@@ -34,8 +37,8 @@ jobs:
         with:
           name: Codex-QQ-Bridge-Windows-x64
           path: |
-            dist/*.zip
-            dist/*.sha256
+            .agents/plugins/codex-qq-bridge/dist/*.zip
+            .agents/plugins/codex-qq-bridge/dist/*.sha256
           retention-days: 30
       - name: Publish versioned beta package
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

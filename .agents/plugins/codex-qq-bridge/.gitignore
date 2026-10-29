@@ -1,0 +1,13 @@
+node_modules/
+dist/
+bundled/
+.planning/
+.impeccable/review/
+*.log
+*.partial
+config.json
+data/
+runtime/
+tmp/
+vendor/
+downloads/

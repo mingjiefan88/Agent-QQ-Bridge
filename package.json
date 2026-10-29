@@ -1,15 +1,16 @@
 {
   "name": "codex-qq-bridge",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
   "description": "Codex 专用 QQ 机器人插件与集成控制台",
   "private": true,
   "type": "module",
-  "engines": {"node": ">=22"},
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "start": "node bin/bridge.mjs",
-    "test": "node --test tests/*.test.mjs",
-    "check:release": "node scripts/check-release.mjs",
-    "bundle": "node scripts/bundle.mjs",
-    "mcp": "node bin/mcp.mjs"
+    "start": "npm --prefix .agents/plugins/codex-qq-bridge start",
+    "test": "npm --prefix .agents/plugins/codex-qq-bridge test",
+    "check:release": "npm --prefix .agents/plugins/codex-qq-bridge run check:release",
+    "bundle": "npm --prefix .agents/plugins/codex-qq-bridge run bundle"
   }
 }

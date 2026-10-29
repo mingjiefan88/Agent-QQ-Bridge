@@ -16,7 +16,7 @@ export async function createBridge({root,port,fetcher=fetch,codexFactory=createC
   const emit=(source,level,text,details={})=>{const event={id:++sequence,at:new Date().toISOString(),source,level,text:cleanTraceText(text,1800),...(details.reply?{reply:cleanTraceText(details.reply,6000)}:{})};events.push(event);if(events.length>500)events.shift();for(const res of clients)res.write('event: log\ndata: '+JSON.stringify(event)+'\n\n');};
   const codex=codexFactory({root,config:()=>config,emit}),napcat=napcatFactory({root,config:()=>config,emit,fetcher});
   const bot=await botFactory({root,config:()=>config,codex,napcat,emit});
-  const snapshot=()=>({app:'Codex QQ Bridge',version:'0.1.0-beta.1',config:publicConfig(config),bot:bot.status(),qq:lastHealth,trace:codex.trace(),events,uptime:Math.round(process.uptime()),platform:process.platform});
+  const snapshot=()=>({app:'Codex QQ Bridge',version:'0.1.0-beta.2',config:publicConfig(config),bot:bot.status(),qq:lastHealth,trace:codex.trace(),events,uptime:Math.round(process.uptime()),platform:process.platform});
   const safeEqual=(a,b)=>{const x=Buffer.from(String(a || '')),y=Buffer.from(String(b || ''));return x.length===y.length && timingSafeEqual(x,y);};
   const expectedHost=()=>`127.0.0.1:${server.address()?.port || listenPort}`;
   const localHost=req=>req.headers.host===expectedHost() || req.headers.host===expectedHost().replace('127.0.0.1','localhost');
@@ -33,7 +33,7 @@ export async function createBridge({root,port,fetcher=fetch,codexFactory=createC
         return json(res,200,await bot.accept(data));
       }
       if(!trusted(req))return json(res,403,{error:'请求来源不允许'});
-      if(req.method==='GET' && path==='/api/session')return json(res,200,{csrf,app:'codex-qq-bridge',version:'0.1.0-beta.1'});
+      if(req.method==='GET' && path==='/api/session')return json(res,200,{csrf,app:'codex-qq-bridge',version:'0.1.0-beta.2'});
       if(req.method==='GET' && path==='/api/state')return json(res,200,snapshot());
       if(req.method==='GET' && path==='/api/events'){
         res.writeHead(200,{'content-type':'text/event-stream','cache-control':'no-cache','connection':'keep-alive','x-accel-buffering':'no'});res.write(': connected\n\n');clients.add(res);const heartbeat=setInterval(()=>res.write(': heartbeat\n\n'),10000);req.on('close',()=>{clearInterval(heartbeat);clients.delete(res);});return;
@@ -69,7 +69,7 @@ export async function createBridge({root,port,fetcher=fetch,codexFactory=createC
             return json(res,200,{checks});
           }
           case '/api/media/install':{const {installMedia}=await import('./media-install.js');return json(res,200,await installMedia(root,emit));}
-          case '/api/diagnostic/export':return json(res,200,{app:'Codex QQ Bridge',version:'0.1.0-beta.1',platform:process.platform,node:process.version,qqOnline:lastHealth.online,phase:lastHealth.phase,enabled:bot.status().enabled,features:config.features,active:bot.status().active,errorCount:events.filter(e=>e.level==='error').length});
+          case '/api/diagnostic/export':return json(res,200,{app:'Codex QQ Bridge',version:'0.1.0-beta.2',platform:process.platform,node:process.version,qqOnline:lastHealth.online,phase:lastHealth.phase,enabled:bot.status().enabled,features:config.features,active:bot.status().active,errorCount:events.filter(e=>e.level==='error').length});
           default:return json(res,404,{error:'接口不存在'});
         }
       }

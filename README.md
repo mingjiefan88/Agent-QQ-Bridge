@@ -2,7 +2,7 @@
 
 **Codex 专用的 Windows QQ 机器人插件，带统一启动器、扫码登录、人格设置与嵌入式实时监控。**
 
-这是原开发预览的完整运行版，当前版本 `0.1.0-beta.1`。独立运行入口已实现，原来只有诊断与设计文档的空壳已替换。它使用本机 Codex CLI 和你自己的账号，不要求在机器人中填写 OpenAI API Key。
+这是原开发预览的完整运行版，当前版本 `0.1.0-beta.2`。独立运行入口已实现，原来只有诊断与设计文档的空壳已替换。它使用本机 Codex CLI 和你自己的账号，不要求在机器人中填写 OpenAI API Key。
 
 ## 一键启动
 
@@ -19,11 +19,13 @@
 此仓库提供正式插件清单、一个安装运维技能与本地 MCP 工具。插件目录与独立启动包使用相同程序，不维护两份机器人。
 
 ```powershell
-codex plugin marketplace add https://github.com/mingjiefan88/Agent-QQ-Bridge
+codex plugin marketplace add https://github.com/mingjiefan88/Agent-QQ-Bridge --sparse .agents/plugins
 codex plugin add codex-qq-bridge@codex-qq-bridge-local
 ```
 
-也可以对解压后的本地目录执行 `codex plugin marketplace add <目录>`。安装后重开 Codex 会话，使用 `qq-bridge` 技能打开启动器或检查状态。MCP 提供查看状态、打开启动器、暂停与诊断四个工具；不提供任意 QQ 外发或任意终端执行工具。首次使用若尚未建立本地 Node 运行时，先双击启动器完成运行时准备。
+GitHub中的完整插件位于[插件源码目录](https://github.com/mingjiefan88/Agent-QQ-Bridge/tree/main/.agents/plugins/codex-qq-bridge)。`--sparse .agents/plugins` 会一起检出市场索引与该目录内的完整运行文件。也可以对解压后的Windows完整包目录执行 `codex plugin marketplace add <目录>`。安装后重开 Codex 会话，使用 `qq-bridge` 技能打开启动器或检查状态。MCP 提供查看状态、打开启动器、暂停与诊断四个工具；不提供任意 QQ 外发或任意终端执行工具。首次使用若尚未建立本地 Node 运行时，先双击启动器完成运行时准备。
+
+升级前先暂停机器人并双击`停止控制台.cmd`，再运行新版本；QQ登录会保留。需要同时让QQ下线时，先在界面停止NapCat。新版继续读取同一本地数据目录。
 
 这是 **Codex 本地插件**，没有 DSH 适配，也不承诺在网页沙盒、手机或其他 Agent 宿主运行。GitHub 分发不等于已经通过官方插件商店审核。
 

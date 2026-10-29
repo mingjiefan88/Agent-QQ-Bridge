@@ -1,3 +1,2 @@
 @echo off
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\launcher.ps1"
-if errorlevel 1 pause
+call "%~dp0.agents\plugins\codex-qq-bridge\启动机器人.cmd"

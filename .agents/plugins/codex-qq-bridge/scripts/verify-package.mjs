@@ -24,4 +24,4 @@ try{
  await run('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',join(pkg,'scripts','launcher.ps1'),'-NoWindow'],{windowsHide:true,env,timeout:30000});const again=JSON.parse(await readFile(join(data,'runtime','console.json'),'utf8')).pid;
  if(first!==again)throw Error('Second launch created another hub');
  console.log(JSON.stringify({verifiedFiles:sums.length,napcatExtracted:true,oneClickStartup:true,secondLaunchReusesHub:true,replyEnabled:false,privateBindings:0,qqNotStarted:true,dataRoot:data}));
-}finally{if(session)await fetch(base+'/api/shutdown',{method:'POST',headers:{'content-type':'application/json','x-bridge-csrf':session.csrf},body:'{}'}).catch(()=>{});}
+}finally{if(session)await run('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',join(pkg,'scripts','stop-console.ps1')],{windowsHide:true,env,timeout:20000});}

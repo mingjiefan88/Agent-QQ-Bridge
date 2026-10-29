@@ -1,1 +1,20 @@
-{"name":"codex-qq-bridge-local","interface":{"displayName":"Codex QQ Bridge"},"plugins":[{"name":"codex-qq-bridge","source":{"source":"local","path":"./"},"policy":{"installation":"AVAILABLE","authentication":"ON_INSTALL"},"category":"Productivity"}]}
+{
+  "name": "codex-qq-bridge-local",
+  "interface": {
+    "displayName": "Codex QQ Bridge"
+  },
+  "plugins": [
+    {
+      "name": "codex-qq-bridge",
+      "source": {
+        "source": "local",
+        "path": "./.agents/plugins/codex-qq-bridge"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
