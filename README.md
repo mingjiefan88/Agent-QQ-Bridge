@@ -4,6 +4,12 @@
 
 使用本机 Codex CLI 和你自己的账号，不需要在机器人里填写 OpenAI API Key。没有运行时 npm 依赖。Windows 完整包包含未经修改的 **NapCat 4.18.41** 官方压缩包和 **Node.js 22.14.0** 便携运行时；官方 QQ 客户端、Codex 客户端、账号和订阅需自行准备。NapCat 有非商业使用限制，见文末许可说明。
 
+## 界面预览
+
+侧栏管理配置，右侧显示运行状态与嵌入式实时监控。下图使用隔离演示数据，未连接真实 QQ 或 Codex；真实运行状态以本机控制台为准。
+
+![统一运行监控台：隔离演示](docs/images/monitor.png)
+
 ## 把仓库链接发给你的 Codex Agent
 
 把下面这段发给**能操作本机 Windows 文件和终端的 Codex Agent**：
@@ -109,4 +115,4 @@ npm run bundle
 
 原创代码采用 MIT。**随完整包附带的 NapCat 使用其自己的非商业有限再分发许可，不能把完整包当作全 MIT 软件或用于商业用途。** NapCat 官方压缩包原样保留，附许可、来源与摘要；Node 和其他组件各适用原许可。QQ、Codex 客户端与账号不在分发包中。
 
-详见 [第三方说明](THIRD_PARTY_NOTICES.md)、[NapCat 许可](third_party/NapCat-LICENSE.txt) 与 [安全说明](SECURITY.md)。本版使用独立运行入口与功能模块，没有复制缺少明确 LICENSE 的私人参考部署整合服务器或原界面。
+详见 [第三方说明](THIRD_PARTY_NOTICES.md)、[NapCat 许可](.agents/plugins/codex-qq-bridge/third_party/NapCat-LICENSE.txt) 与 [安全说明](SECURITY.md)。本版使用独立运行入口与功能模块，没有复制缺少明确 LICENSE 的私人参考部署整合服务器或原界面。
