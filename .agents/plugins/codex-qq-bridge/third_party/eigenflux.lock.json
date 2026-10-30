@@ -1,0 +1,10 @@
+{
+  "version": "0.7.7",
+  "platform": "windows-amd64",
+  "url": "https://cdn.eigenflux.ai/cli/0.7.7/eigenflux-windows-amd64.exe",
+  "sha256": "b17a3e8233e80fb2985caf033e7fd368808b4f562288248572f691503568ad13",
+  "size": 12509184,
+  "source": "https://github.com/phronesis-io/eigenflux",
+  "license": "EigenFlux Open Source License (Apache 2.0 with trademark condition)",
+  "distribution": "optional verified download, not bundled"
+}

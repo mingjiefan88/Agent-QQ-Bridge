@@ -1,8 +1,12 @@
 # 来源、许可与分发边界
 
+**许可按组件分别适用。根目录 MIT 仅覆盖本项目原创代码与图标；Windows 完整包还含 NapCat 的非商业再分发条款，不能把整个完整包表述为 MIT 授权。** 本文件、`LICENSE`、`third_party/NapCat-LICENSE.txt` 及各官方压缩包内的许可声明应随发布保留。
+
 ## 本项目原创实现
 
 Codex QQ Bridge 原创源码采用根目录 MIT 许可。`src/server.js`、`bot.js`、`codex.js`、`napcat.js`、配置、启动器、网页与MCP入口为独立实现。`qq-*` 功能模块来自为该机器人独立新增的模块，本次迁入时删除私人默认配置并接入新入口。
+
+`icons/bridge.svg`、其 PNG/ICO 导出与 `public/bridge.svg`、`public/favicon.ico` 为本项目原创桥接图标，不使用腾讯 QQ 或 OpenAI 官方标志。图片逐项 SHA256 见 `third_party/assets.lock.json`；`scripts/generate-icons.py` 仅用于维护者重建导出，运行插件不依赖 Python 或 Pillow。
 
 历史私人部署基于 [Epic0522/Codex-Remote-Contact](https://github.com/Epic0522/Codex-Remote-Contact)，截至2026-10-29其根目录没有明确LICENSE。本包不包含该上游的整合 `server.js`、原网页、macOS模块或私人Git历史。引用项目名称不表示获得额外授权。
 
@@ -31,3 +35,9 @@ Copyright (c) 2009 Kazuhiko Arase，MIT。固定npm包`qrcode-generator@1.4.4`�
 ## Codex
 
 使用本机Codex CLI及用户自己的登录，未捆绑Codex可执行文件、账户凭据或授权。使用遵循对应OpenAI服务与软件条款。此仓库分发不是官方商店审核或背书。
+
+## EigenFlux CLI 0.7.7（可选下载）
+
+机器人可按用户选择，从 [EigenFlux 官方 CDN](https://cdn.eigenflux.ai/cli/0.7.7/eigenflux-windows-amd64.exe) 下载固定版本 Windows AMD64 CLI；版本、大小与 SHA256 见 `third_party/eigenflux.lock.json`。本仓库和 Windows 完整包不捆绑该可执行文件。下载后的 CLI、官方签名技能与身份数据保存在机器人的独立本地目录，不写入主 Codex Agent 的目录。
+
+上游源码与许可来自 [phronesis-io/eigenflux](https://github.com/phronesis-io/eigenflux) 的 [LICENSE](https://github.com/phronesis-io/eigenflux/blob/main/LICENSE)：Apache License 2.0 基础许可及 EigenFlux 商标附加限制，保留原文于 `third_party/EigenFlux-LICENSE.txt`，并附 [Apache 官方基础条款全文](https://www.apache.org/licenses/LICENSE-2.0.txt) 于 `third_party/Apache-2.0.txt`。品牌与商标权不因源码许可而转让；本项目仅描述与 EigenFlux 的兼容，不代表上游官方服务或背书。官方服务的邮箱验证、账户使用与相应服务条款另行适用。

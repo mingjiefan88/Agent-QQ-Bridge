@@ -8,3 +8,30 @@
 dialog{box-shadow:0 20px 80px #00000040}
 @media(max-width:900px){.monitor-pane{height:560px;min-height:480px}}
 @media(max-width:600px){.status-strip>div>span:last-child{font-size:11px}.terminal{font-size:11px}.monitor-pane{height:570px}}
+
+/* Release 1.0: preserve the local workbench, clarify controls and real protection states. */
+:root{--monitor-height:calc(100vh - 330px)}
+.brand img{display:block;flex:none;width:36px;height:36px}
+.notice{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}
+.notice>span{flex:1;min-width:0}.notice button{background:transparent;border:0;color:inherit;padding:1px 4px;font-size:12px;flex:none}
+button:active:not(:disabled){background:#dae5f8}button.primary:active:not(:disabled){background:#163b95}
+input[type=checkbox]{accent-color:var(--accent)}
+input:disabled,textarea:disabled{background:#edf1f5;color:var(--muted)}
+.operation-strip{display:flex;flex-wrap:wrap;gap:8px 22px;margin:-8px 1px 18px;font-size:11px;color:#526576;line-height:1.7;font-variant-numeric:tabular-nums}
+.operation-strip .is-quiet{color:#825518;font-weight:600}
+.settings-pane{max-height:calc(100vh - 330px);scrollbar-color:#a8b8c8 #f3f5f7}
+.settings-pane h3{font-size:14px;font-weight:650;margin:0 0 8px}
+.policy-note{border-top:1px solid var(--line);margin-top:22px;padding-top:19px}
+.policy-note p{margin:0}.integration-status{padding:15px 0 18px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.integration-status strong{font-size:17px;font-weight:600}.integration-status p{margin:0;overflow-wrap:anywhere}
+.section-divider{border-top:1px solid var(--line);margin:24px 0 21px}
+.consent{cursor:pointer}.consent span{min-width:0}.consent input{flex-shrink:0}
+#eigen-auth-link{display:inline-flex;align-items:center;min-height:34px}
+.terminal-toolbar button{min-height:32px}.terminal-actions .compact{display:flex;align-items:center;gap:3px;min-height:32px}
+#page-title{margin-top:0}.status-label{font-size:12px}
+@media(min-width:901px){.monitor-pane{height:var(--monitor-height)}}
+@media(max-width:1180px){.operation-strip{gap:5px 14px}.brand img{width:30px;height:30px}.sidebar{overflow-y:auto}.sidebar-bottom{padding-top:18px}}
+@media(max-width:900px){.settings-pane{max-height:none}.operation-strip{margin-top:-5px}.top-actions{flex-shrink:0}.monitor-pane{height:560px}}
+@media(max-width:600px){.brand img{width:30px;height:30px}.operation-strip{display:grid;gap:4px;margin-bottom:15px}.topbar{min-height:86px}.topbar h1{font-size:22px}.sidebar nav a{min-height:38px}.monitor-pane{height:570px}.terminal-actions{flex-wrap:wrap}.terminal-footer{flex-wrap:wrap}.status-strip>div{gap:6px}.settings-pane button{min-height:36px}.status-strip>div:nth-child(n+3){padding-top:4px}}
+
+.eigen-feed{margin-top:18px}.eigen-feed article{border-top:1px solid var(--line);padding:16px 0}.eigen-feed h4{margin:0 0 7px;font-size:13px;line-height:1.65;overflow-wrap:anywhere}.eigen-feed article p{margin:0 0 8px;white-space:pre-wrap;overflow-wrap:anywhere}.eigen-feed article a{font-size:12px}

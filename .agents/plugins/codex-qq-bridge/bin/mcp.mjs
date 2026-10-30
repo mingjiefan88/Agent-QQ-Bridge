@@ -22,7 +22,7 @@ const tools=Object.entries(names).map(([name,description])=>({name,description,i
 const reply=(id,result,error)=>process.stdout.write(JSON.stringify({jsonrpc:'2.0',id,...(error?{error}:{result})})+'\n');
 const input=createInterface({input:process.stdin,crlfDelay:Infinity});
 for await(const line of input){let req;try{if(line.length>1024*1024)throw Error('Request too large');req=JSON.parse(line);if(req.id===undefined)continue;
-  if(req.method==='initialize')reply(req.id,{protocolVersion:'2024-11-05',capabilities:{tools:{}},serverInfo:{name:'codex-qq-bridge',version:'0.1.0-beta.2'}});
+  if(req.method==='initialize')reply(req.id,{protocolVersion:'2024-11-05',capabilities:{tools:{}},serverInfo:{name:'codex-qq-bridge',version:'1.0.0'}});
   else if(req.method==='ping')reply(req.id,{});
   else if(req.method==='tools/list')reply(req.id,{tools});
   else if(req.method==='tools/call'){if(!Object.hasOwn(names,req.params?.name))throw Error('Tool not found');const result=await call(req.params.name);reply(req.id,{content:[{type:'text',text:JSON.stringify(result)}]});}

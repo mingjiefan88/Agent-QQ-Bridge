@@ -38,11 +38,13 @@ export function createNapCat({root,config,emit=()=>{},fetcher=fetch}) {
   }finally{starting=false;}}
   async function configureOneBot(){const s=await status();const login=await web('/api/QQLogin/GetQQLoginInfo');const id=String(s.userId || login.uin || login.account || config().qqAccount || '');if(!/^\d{5,16}$/.test(id))throw Error('请先登录QQ，或填写机器人QQ号后保存');
     const c=config(),path=join(napcatDir,'config',`onebot11_${id}.json`);
-    const body={network:{httpServers:[{name:'CodexQQBridge',enable:true,port:c.oneBotPort,host:'127.0.0.1',enableCors:false,enableWebsocket:false,messagePostFormat:'array',token:c.oneBotToken}],httpClients:[{name:'CodexQQBridge',enable:true,url:`http://127.0.0.1:${c.port}/onebot/event`,messagePostFormat:'array',reportSelfMessage:false,token:c.callbackSecret}],websocketServers:[],websocketClients:[]},musicSignUrl:'',enableLocalFile2Url:true,parseMultMsg:true};
+    const body={network:{httpServers:[{name:'CodexQQBridge-API',enable:true,port:c.oneBotPort,host:'127.0.0.1',enableCors:false,enableWebsocket:false,messagePostFormat:'array',token:c.oneBotToken}],httpClients:[{name:'CodexQQBridge-Events',enable:true,url:`http://127.0.0.1:${c.port}/onebot/event`,messagePostFormat:'array',reportSelfMessage:false,token:c.callbackSecret}],websocketServers:[],websocketClients:[]},musicSignUrl:'',enableLocalFile2Url:true,parseMultMsg:true};
     let existing;try{existing=JSON.parse(await readFile(path,'utf8'));}catch(e){if(e.code!=='ENOENT')throw Error('OneBot原配置无法读取，已保留');}
     if(existing)await writeFile(path+'.backup-'+Date.now(),JSON.stringify(existing,null,2),{mode:0o600});
-    // NapCat hot-reloads this file. The launcher UI verifies both APIs after save.
-    await writeFile(path,JSON.stringify(body,null,2),{mode:0o600});emit('napcat','info','已保存QQ连接配置；请等待接口重载，未就绪时重启NapCat');return {saved:true};
+    // Persist first, then ask the native API to reload without dropping QQ login.
+    await writeFile(path,JSON.stringify(body,null,2),{mode:0o600});
+    try{await web('/api/OB11Config/SetConfig',{config:JSON.stringify(body)});emit('napcat','complete','QQ连接配置已保存并热重载');return {saved:true,applied:true};}
+    catch{emit('napcat','info','QQ连接配置已保存；本次未完成热重载，请重启NapCat后检查连接');return {saved:true,applied:false};}
   }
   async function logs(){const dir=join(root,'runtime','logs'),lines=[];for(const name of ['napcat.log','napcat.err.log']){const path=join(dir,name);try{const info=await stat(path);const {open}=await import('node:fs/promises');const file=await open(path);try{const size=Math.min(info.size,48000),bytes=Buffer.alloc(size);await file.read(bytes,0,size,Math.max(0,info.size-size));lines.push(...bytes.toString('utf8').split(/\r?\n/).slice(-100).map(x=>cleanTraceText(x,1200)));}finally{await file.close();}}catch{}}
     // Auth secrets can appear verbatim in NapCat startup URLs.

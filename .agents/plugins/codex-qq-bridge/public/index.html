@@ -1,29 +1,30 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Codex QQ Bridge · 机器人控制台</title><link rel="stylesheet" href="/style.css"><script defer src="/qrcode.js"></script><script type="module" src="/app.js"></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><meta name="theme-color" content="#285bd4"><title>Codex QQ Bridge · 机器人控制台</title><link rel="icon" href="/bridge.svg" type="image/svg+xml"><link rel="alternate icon" href="/favicon.ico"><link rel="stylesheet" href="/style.css"><script defer src="/qrcode.js"></script><script type="module" src="/app.js"></script></head>
 <body>
 <div class="app-shell">
   <aside class="sidebar">
-    <a class="brand" href="#monitor" aria-label="Codex QQ Bridge 首页"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 8h16v12H14l-6 5V8Z"/><path d="m13 13-3 3 3 3m6-6 3 3-3 3"/></svg><span>Codex QQ<span class="brand-sub">Bridge 控制台</span></span></a>
+    <a class="brand" href="#monitor" aria-label="Codex QQ Bridge 首页"><img src="/bridge.svg" width="36" height="36" alt=""><span>Codex QQ<span class="brand-sub">Bridge 控制台</span></span></a>
     <nav aria-label="主导航" id="nav"></nav>
-    <div class="sidebar-bottom"><span class="local-dot"></span> 仅在本机运行<span class="version">v0.1.0 beta</span></div>
+    <div class="sidebar-bottom"><span class="local-dot"></span> 仅在本机运行<span class="version" id="app-version">v1.0.0</span></div>
   </aside>
   <div class="main-shell">
     <header class="topbar"><div><h1 id="page-title">运行监控</h1></div><div class="top-actions"><span id="run-state" class="badge">正在连接</span><button id="toggle-bot" class="primary">启动机器人</button></div></header>
-    <div id="notice" class="notice" role="status" hidden></div>
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden><span id="notice-text"></span><button id="dismiss-notice" aria-label="关闭提示">关闭</button></div>
     <div id="disconnected" class="connection-banner" hidden>与启动器失去连接，正在重连。若已关闭启动器，请重新双击启动。</div>
     <section class="status-strip" aria-label="运行状态">
       <div><span class="status-label">QQ 连接</span><strong id="qq-status">检测中</strong><span id="qq-detail">等待服务状态</span></div>
-      <div><span class="status-label">Codex 任务</span><strong id="codex-status">空闲</strong><span id="codex-detail">等待新的请求</span></div>
-      <div><span class="status-label">对话与记忆</span><strong id="conversation-status">0 个续聊窗口</strong><span id="memory-detail">上下文按群隔离</span></div>
-      <div><span class="status-label">媒体任务</span><strong id="media-status">空闲</strong><span id="media-detail">点歌 · 生图 · 表情包</span></div>
+      <div><span class="status-label">Codex 任务</span><strong id="codex-status">等待状态</strong><span id="codex-detail">等待新的请求</span></div>
+      <div><span class="status-label">对话与记忆</span><strong id="conversation-status">等待状态</strong><span id="memory-detail">上下文按群隔离</span></div>
+      <div><span class="status-label">媒体任务</span><strong id="media-status">等待状态</strong><span id="media-detail">点歌 · 生图 · 表情包</span></div>
     </section>
+    <section class="operation-strip" aria-label="运行保护"><span id="batch-summary">群聊合并：等待状态</span><span id="budget-summary">调用保护：等待状态</span><span id="quiet-summary">主人静默：等待状态</span><a href="#eigenflux" id="eigen-summary">EigenFlux：等待状态</a></section>
     <div class="workspace" id="workspace">
       <section id="settings-pane" class="settings-pane" aria-label="配置面板" hidden></section>
       <main class="monitor-pane" aria-label="实时监控终端">
         <div class="monitor-heading"><div><h2>实时监控</h2><p>事件、公开进度和发送回执，都在这里。</p></div><span id="stream-state" class="stream-state">实时连接中</span></div>
         <div class="terminal-toolbar"><div class="terminal-tabs" role="group" aria-label="日志来源"><button data-source="all" class="active">全部</button><button data-source="codex">Codex</button><button data-source="qq">QQ 消息</button><button data-source="napcat">NapCat</button></div><div class="terminal-actions"><label class="compact"><input type="checkbox" id="errors-only"> 仅错误</label><button id="pause-scroll" aria-pressed="false">暂停滚动</button><button id="clear-view">清屏</button></div></div>
-        <div class="terminal" id="terminal" role="log" aria-label="机器人运行日志" tabindex="0"><div class="terminal-empty" id="terminal-empty"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="m12 16 8 8-8 8m14 0h10"/></svg><h3>等待新的活动</h3><p>完成登录并启动机器人后，任务进度和回复结果会显示在这里。</p><span>不会显示内部思维原文。</span></div></div>
+        <div class="terminal" id="terminal" role="log" aria-live="off" aria-label="机器人运行日志" tabindex="0"><div class="terminal-empty" id="terminal-empty"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="m12 16 8 8-8 8m14 0h10"/></svg><h3>等待新的活动</h3><p>完成登录并启动机器人后，任务进度和回复结果会显示在这里。</p><span>不会显示内部思维原文。</span></div></div>
         <footer class="terminal-footer"><span id="log-count">0 条记录</span><span>自动更新 · 最多保留 500 条</span><button id="copy-diagnostic">复制诊断摘要</button></footer>
       </main>
     </div>

@@ -17,16 +17,16 @@ test('generic defaults, input validation, atomic persistence and redaction',()=>
  assert.throws(()=>validateConfig({...c,port:c.oneBotPort}));assert.throws(()=>validateConfig({...c,ownerUserIds:['not-id']}));assert.throws(()=>validateConfig({...c,features:{...c.features,shell:true}}));
 }));
 test('actual bot: mentioned wake, repeated no-mention followups, group isolation, closing, dedup and verified owner role',()=>temporary(async root=>{
- const c={...defaults(),ownerUserIds:[owner],allowedGroups:[group]};let calls=0;const delivered=[],prompts=[];
+ const c={...defaults(),ownerUserIds:[owner],allowedGroups:[group]};let calls=0;const delivered=[],prompts=[];let clock=Date.now();
  const codex={diagnose:async()=>({ok:true}),cancel:()=>{},runCli:async()=>{},complete:async prompt=>{calls++;prompts.push(prompt);return '这是延续上文的回复';}};
  const napcat={oneBot:()=> 'http://127.0.0.1:1',status:async()=>({online:true}),call:async(action,params)=>({status:'ok',retcode:0,data:action==='get_group_msg_history'?{messages:[]}:action==='get_group_member_info'?{group_id:Number(group),user_id:Number(owner),role:'owner'}:action==='send_group_msg'?(delivered.push(params),{message_id:1000+delivered.length}):{}})};
- const bot=await createBot({root,config:()=>c,codex,napcat});let seq=0;
- const message=(text,options={})=>({post_type:'message',message_type:'group',self_id:Number(self),group_id:Number(group),user_id:Number(owner),time:Date.now()/1000,message_id:++seq,sender:{nickname:'合成用户'},message:[...(options.at?[{type:'at',data:{qq:self}}]:[]),{type:'text',data:{text}}],...options.raw});
+ const bot=await createBot({root,config:()=>c,codex,napcat,now:()=>clock,batchOptions:{now:Date.now,quietMs:2,busyQuietMs:4},replyBudgetOptions:{minIntervalMs:0}});let seq=0;
+ const message=(text,options={})=>({post_type:'message',message_type:'group',self_id:Number(self),group_id:Number(group),user_id:Number(owner),time:clock/1000,message_id:++seq,sender:{nickname:'合成用户'},message:[...(options.at?[{type:'at',data:{qq:self}}]:[]),{type:'text',data:{text}}],...options.raw});
  try{
  await bot.start();const wake=message('聊聊角色配色',{at:true});await bot.accept(wake);await waitFor(()=>delivered.length===1 && bot.status().queued===0);
  assert.equal(bot.status().conversation.active,1);assert.match(prompts[0],/同时是本群群主/);
- await bot.accept(message('那改成蓝色呢'));await waitFor(()=>delivered.length===2 && bot.status().queued===0);
- await bot.accept(message('再具体一点'));await waitFor(()=>delivered.length===3 && bot.status().queued===0);assert.equal(calls,3);assert.match(prompts.at(-1),/持续对话/);
+ clock+=31000;await bot.accept(message('那改成蓝色呢'));await waitFor(()=>delivered.length===2 && bot.status().queued===0);
+ clock+=31000;await bot.accept(message('再具体一点'));await waitFor(()=>delivered.length===3 && bot.status().queued===0);assert.equal(calls,3);assert.match(prompts.at(-1),/持续对话/);
  assert.equal((await bot.accept(wake)).duplicate,true);assert.equal(delivered.length,3);
  await bot.accept(message('其他群的话',{raw:{group_id:99999999}}));await bot.accept(message('其他人说话',{raw:{user_id:Number(user)}}));await waitFor(()=>bot.status().queued===0);assert.equal(delivered.length,3);
  await bot.accept(message('不用回复了'));await waitFor(()=>bot.status().queued===0);assert.equal(bot.status().conversation.active,0);
@@ -56,9 +56,9 @@ test('actual HTTP: local host/origin, CSRF, authenticated callback, persistence,
  }finally{await bridge.close();}
 }));
 test('attention expires/renews, does not forge mentions, and rejects redirection',()=>{
- let now=1000;const c=createConversationWindow({allowed:e=>e.groupId===group,mentioned:e=>e.hasSelfAtSegment,now:()=>now});
+ let now=1000;const c=createConversationWindow({allowed:e=>e.groupId===group,mentioned:e=>e.hasSelfAtSegment,now:()=>now,windowMs:300000,minIntervalMs:0});
  const wake={groupId:group,senderId:owner,selfId:self,text:'你好',hasSelfAtSegment:true};c.observe(wake);c.replied(wake,true);
  const follow={...wake,hasSelfAtSegment:false,text:'继续'};c.observe(follow);assert.equal(c.decision(follow).ok,true);assert.equal(follow.hasSelfAtSegment,false);
- now+=299000;c.replied(follow,true);now+=299000;const more={...follow};c.observe(more);assert.equal(c.decision(more).ok,true);now+=1001;assert.equal(c.decision(more).ok,false);
+ now+=29000;c.replied(follow,true);now=300999;const more={...follow};c.observe(more);assert.equal(c.decision(more).ok,true);now+=2;assert.equal(c.decision(more).ok,false,'Automatic replies do not extend the hard expiry');
  const elsewhere={...follow,hasAtSegment:true};c.observe(elsewhere);assert.equal(c.decision(elsewhere).ok,false);
 });

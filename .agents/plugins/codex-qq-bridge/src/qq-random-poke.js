@@ -7,7 +7,7 @@ export function createRandomPoke({path,qq,channelEnabled,call,social=()=>({}),bu
   let data={version:1,enabled:true,groups:{}},saving=Promise.resolve();
   const active=new Map(),locks=new Set();
   const stats={attempts:0,sent:0,failures:0,lastError:null};
-  const allowed=e=>channelEnabled() && e.groupId && qq.allowedGroups.includes(String(e.groupId)) && id(e.senderId) && !qq.bannedUserIds?.includes(String(e.senderId)) && String(e.senderId)!==String(e.selfId);
+  const allowed=e=>channelEnabled() && e.groupId && qq.allowedGroups.includes(String(e.groupId)) && !qq.isQuiet?.(e.groupId) && id(e.senderId) && !qq.bannedUserIds?.includes(String(e.senderId)) && String(e.senderId)!==String(e.selfId);
   function group(key){return data.groups[key] ||= {enabled:true,lastAt:0,lastAttempt:0,day:'',count:0,targets:{},optOut:[]};}
   function save(){const body=JSON.stringify(data,null,2);saving=saving.catch(()=>{}).then(async()=>{const temp=path+'.'+randomUUID()+'.tmp';try{await writeFile(temp,body,{mode:0o600});await rename(temp,path);}catch(error){await unlink(temp).catch(()=>{});throw error;}});return saving;}
   async function api(action,params={}) {const response=await call(action,params);if(response?.status!=='ok' || response.retcode!==0)throw Error('QQ随机戳操作未确认');return response.data;}

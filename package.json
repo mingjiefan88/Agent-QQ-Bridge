@@ -1,6 +1,6 @@
 {
   "name": "codex-qq-bridge",
-  "version": "0.1.0-beta.2",
+  "version": "1.0.0",
   "description": "Codex 专用 QQ 机器人插件与集成控制台",
   "private": true,
   "type": "module",

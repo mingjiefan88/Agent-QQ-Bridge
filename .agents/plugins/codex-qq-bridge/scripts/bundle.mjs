@@ -7,7 +7,8 @@ import {promisify} from 'node:util';
 const run=promisify(execFile),root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),files=JSON.parse(await readFile(join(root,'release-files.json'),'utf8'));
 const out=resolve(process.env.CODEX_QQ_DIST || join(root,'dist'));await mkdir(out,{recursive:true});
 const stage=await mkdtemp(join(out,'package-work-')),pkg=join(stage,'Codex-QQ-Bridge');await mkdir(pkg);
-const cacheArg=process.argv.indexOf('--cache'),cache=cacheArg>=0?resolve(process.argv[cacheArg+1]):null;
+const cacheArg=process.argv.indexOf('--cache');if(cacheArg>=0 && !process.argv[cacheArg+1])throw Error('--cache requires a directory');
+const cache=cacheArg>=0?resolve(process.argv[cacheArg+1]):null;
 try{
   await run(process.execPath,[join(root,'scripts','check-release.mjs')],{cwd:root});
   const sums=[];
@@ -17,6 +18,7 @@ try{
     const lock=JSON.parse(await readFile(join(root,'third_party',name+'.lock.json'),'utf8'));let bytes;
     if(cache)try{bytes=await readFile(join(cache,file));}catch{}
     if(!bytes){console.log('Downloading official '+name+' '+lock.version);const res=await fetch(lock.url,{signal:AbortSignal.timeout(240000)});if(!res.ok || !res.body)throw Error('Download failed: '+name);const chunks=[];let size=0;const reader=res.body.getReader();try{while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>160*1024*1024)throw Error('Oversized dependency');chunks.push(value);}}finally{await reader.cancel().catch(()=>{});}bytes=Buffer.concat(chunks);}
+    if(lock.size && bytes.length!==lock.size)throw Error('Dependency size mismatch: '+name);
     const digest=createHash('sha256').update(bytes).digest('hex');if(digest!==lock.sha256)throw Error('Dependency checksum mismatch: '+name);await writeFile(join(pkg,'bundled',file),bytes);sums.push(digest+'  bundled/'+file);
   }
   await writeFile(join(pkg,'SHA256SUMS.txt'),sums.join('\n')+'\n');

@@ -44,10 +44,10 @@ export function createGroupContext({qq,fetchHistory,normalize,display,save,assis
             const item=normalize({...raw,self_id:raw.self_id??event.selfId,message_type:'group'});
             const text=boundText(display(item));
             if(!text) continue;
-            history.push({at:new Date(Number(raw.time)*1000 || Date.now()).toISOString(),messageId:String(raw.message_id),senderId:item.senderId,senderLabel:item.senderName,text,isOwner:qq.ownerUserIds.includes(String(item.senderId)),isSelf:String(item.senderId)===String(item.selfId),messageSeq:Number(raw.real_seq || raw.message_seq || 0)});
+            history.push({at:new Date(Number(raw.time)*1000 || Date.now()).toISOString(),messageId:String(raw.message_id),senderId:item.senderId,senderLabel:item.senderName,atTargets:item.atTargets || [],text,isOwner:qq.ownerUserIds.includes(String(item.senderId)),isSelf:String(item.senderId)===String(item.selfId),messageSeq:Number(raw.real_seq || raw.message_seq || 0)});
           }
           const unique=new Map();
-          for(const item of [...history,...(qq.memory.recentMessages[groupId] || [])]) unique.set(item.messageId || `${item.at}:${item.senderId}:${item.text}`,item);
+          for(const item of [...history,...(qq.memory.recentMessages[groupId] || [])]) {const key=item.messageId || `${item.at}:${item.senderId}:${item.text}`,previous=unique.get(key);unique.set(key,{...previous,...item,atTargets:item.atTargets?.length?item.atTargets:previous?.atTargets || [],text:previous?.atTargets?.length && !item.atTargets?.length?previous.text:item.text});}
           qq.memory.recentMessages[groupId]=[...unique.values()].sort((a,b)=>Date.parse(a.at)-Date.parse(b.at) || (a.messageSeq||0)-(b.messageSeq||0)).slice(-qq.memory.groupRecentLimit);
           await save();
           status.lastSync=new Date().toISOString();
@@ -58,13 +58,13 @@ export function createGroupContext({qq,fetchHistory,normalize,display,save,assis
       pending.set(groupId,task);
       return task;
     },
-    recent(event,{expandLevel=0}={}) {
+    recent(event,{expandLevel=0,includeAfterTrigger=false}={}) {
       if(!allowed(event)) return [];
       const now=Date.now();
       const currentId=String(event.raw?.message_id || '');
       const entries=qq.memory.recentMessages[event.groupId] || [];
       const triggerIndex=currentId ? entries.findIndex(item=>String(item.messageId)===currentId) : -1;
-      return (triggerIndex>=0 ? entries.slice(0,triggerIndex+1) : entries)
+      return (triggerIndex>=0 && !includeAfterTrigger ? entries.slice(0,triggerIndex+1) : entries)
         .filter(item=>now-Date.parse(item.at)<2*60*60*1000)
         .slice(-(expandLevel>0?48:24))
         .map(item=>({...item,text:boundText(item.text),senderLabel:contextSpeaker(item,event,qq,assistantName()),isTrigger:Boolean(currentId && String(item.messageId)===currentId)}));

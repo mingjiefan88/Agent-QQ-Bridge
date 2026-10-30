@@ -1,0 +1,3 @@
+# Preserve the verified upstream browser asset byte-for-byte on Windows checkout.
+public/qrcode.js -text
+*.zip binary
